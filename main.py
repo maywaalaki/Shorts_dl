@@ -206,7 +206,7 @@ def threaded_worker(client, message, url):
 
 @app.on_message(filters.private & filters.command("start"))
 def start(client, message: Message):
-    message.reply_text("👋 Salaam Laki! Iisoodir link si aan kuugu soo dajiyo video-ga.")
+    message.reply_text("👋 Salaam Iisoodir link si aan kuugu soo dajiyo video-ga.")
 
 @app.on_message(filters.private & filters.text)
 def handle_link(client, message: Message):
