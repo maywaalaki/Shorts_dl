@@ -55,7 +55,7 @@ DOWNLOAD_PATH = "downloads"
 os.makedirs(DOWNLOAD_PATH, exist_ok=True)
 
 MAX_CONCURRENT_DOWNLOADS = 2
-MAX_VIDEO_DURATION = 2400
+MAX_VIDEO_DURATION = 300
 
 YDL_OPTS_PIN = {
     "format": "bestvideo+bestaudio/best",
