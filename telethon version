@@ -36,7 +36,7 @@ async def handler(event):
     msg = await event.reply("⏳ **Waan ku guda jiraa, fadlan sug...**")
 
     ydl_opts = {
-        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        'format': 'best',
         'outtmpl': 'video_%(id)s.%(ext)s',
         'quiet': True,
     }
