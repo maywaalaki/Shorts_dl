@@ -73,7 +73,7 @@ def extract_metadata_from_info(info):
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start(event):
-    await event.reply("**Haye Laki!** Iisoo dir linkiga muuqaalka aad rabto inaan kuu soo dejiyo, waxaana kuugu soo darayaa thumbnail.")
+    await event.reply("**Haye!** Iisoo dir linkiga muuqaalka aad rabto inaan kuu soo dejiyo,")
 
 @bot.on(events.NewMessage)
 async def handler(event):
@@ -105,7 +105,7 @@ async def handler(event):
                     thumb_path = potential_thumb
                     break
 
-            caption = f"🎬 **{title}**"
+            caption = f" **{title}**"
 
             attr = []
             if width and height and duration:
