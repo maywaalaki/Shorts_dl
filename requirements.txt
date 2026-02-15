@@ -3,3 +3,6 @@ yt-dlp
 flask
 requests
 telethon
+pyrogram
+tgcrypto
+
