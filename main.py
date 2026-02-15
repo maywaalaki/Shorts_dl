@@ -54,7 +54,7 @@ def run_web():
 
 API_ID = 29169428
 API_HASH = '55742b16a85aac494c7944568b5507e5'
-BOT_TOKEN = '8504050677:AAG2VZSPyGt7ItPv9s-mUzNEsT_oPtxusKg'
+BOT_TOKEN = '8504050677:AAF1JM3DBMAZLPuWcpyKmCU3yot0uPrAvTc'
 
 bot = TelegramClient('video_dl_bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
