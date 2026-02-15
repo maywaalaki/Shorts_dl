@@ -60,7 +60,7 @@ def extract_metadata_from_info(info):
 
 @bot.on_message(filters.command("start"))
 async def start(client, message):
-    welcome_text = "**Haye Laki!** Iisoo dir linkiga muuqaalka aad rabto inaan kuu soo dejiyo."
+    welcome_text = "**Haye!** Iisoo dir linkiga muuqaalka aad rabto inaan kuu soo dejiyo."
     await message.reply_text(welcome_text, quote=True)
 
 @bot.on_message(filters.command("web"))
