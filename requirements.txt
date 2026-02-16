@@ -6,3 +6,10 @@ telethon
 pyrogram
 tgcrypto
 
+
+pyTelegramBotAPI
+flask
+edge-tts
+asyncio
+pymongo
+pydub
