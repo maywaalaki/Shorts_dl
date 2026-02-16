@@ -13,3 +13,9 @@ edge-tts
 asyncio
 pymongo
 pydub
+
+flask
+flask-cors
+edge-tts
+pymongo
+gunicorn
