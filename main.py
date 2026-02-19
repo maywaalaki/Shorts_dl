@@ -9,7 +9,7 @@ API_ID = 29169428
 API_HASH = '55742b16a85aac494c7944568b5507e5'
 BOT_TOKEN = '8006815965:AAEb00GC21KEKbRaTz-_O_cvSlaMl2nhAwY'
 HF_SERVER_URL = "https://lakiup3-ytdlsr.hf.space/download"
-RENDER_URL = "https://your-app-name.onrender.com"
+RENDER_URL = "https://shorts-dl-43fa.onrender.com"
 
 bot = TelegramClient('video_dl_bot', API_ID, API_HASH)
 app = Flask(__name__)
