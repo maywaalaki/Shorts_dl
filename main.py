@@ -45,7 +45,12 @@ def run_web():
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start(event):
-    await event.reply("**Haye !** Iisoo dir linkiga TikTok, Instagram ama Pinterest si aan HF Engine ugu diro.")
+    await event.reply("Welcome 👋
+
+This bot lets you download videos from
+YouTube, TikTok, Instagram, and more.
+
+👉 Just send the video link")
 
 @bot.on(events.NewMessage)
 async def handler(event):
