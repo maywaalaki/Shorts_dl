@@ -32,7 +32,7 @@ def webhook():
             bot.send_file(
                 chat_id, 
                 video_url, 
-                caption=f"**{title}**\n\nHalkan ka daawo muuqaalkaaga!",
+                caption=f"**{title}**\n\nDownloaded by @ShortsDL_Bot",
                 supports_streaming=True
             ), main_loop
         )
