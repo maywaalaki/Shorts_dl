@@ -45,12 +45,12 @@ def run_web():
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start(event):
-    await event.reply("** Welcome 👋
+    await event.reply(""" Welcome 👋
 
 This bot lets you download videos from
 YouTube, TikTok, Instagram, and more.
 
-👉 Just send the video link**")
+👉 Just send the video link""")
 
 @bot.on(events.NewMessage)
 async def handler(event):
