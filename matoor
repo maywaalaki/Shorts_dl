@@ -1,0 +1,79 @@
+import os
+import uuid
+import uvicorn
+from fastapi import FastAPI, BackgroundTasks, HTTPException
+from fastapi.staticfiles import StaticFiles
+from yt_dlp import YoutubeDL
+import requests
+
+app = FastAPI()
+
+# Create static folder if not exists
+if not os.path.exists("static"):
+    os.makedirs("static")
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+def process_video_task(url: str, chat_id: int, webhook_url: str):
+    file_id = str(uuid.uuid4())[:8]
+    filename = f"video_{file_id}.mp4"
+    filepath = os.path.join("static", filename)
+    
+    ydl_opts = {
+        'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+        'outtmpl': filepath,
+        'quiet': True,
+        'no_warnings': True,
+    }
+    
+    try:
+        with YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=True)
+            
+            # Hugging Face URL dhisid sax ah
+            # SPACE_ID waxay noqonaysaa "lakiup3/ytdlsr"
+            space_id = os.environ.get('SPACE_ID')
+            if space_id:
+                user, space_name = space_id.split('/')
+                direct_hf_url = f"https://{user}-{space_name.replace('_', '-')}.hf.space/static/{filename}"
+            else:
+                # Haddii uu meel kale joogo
+                direct_hf_url = f"https://lakiup3-ytdlsr.hf.space/static/{filename}"
+            
+            payload = {
+                "success": True,
+                "video_url": direct_hf_url,
+                "title": info.get("title", "No Title"),
+                "chat_id": chat_id
+            }
+            
+            if webhook_url:
+                requests.post(webhook_url, json=payload, timeout=15)
+                
+    except Exception as e:
+        print(f"Error: {e}")
+        if webhook_url:
+            requests.post(webhook_url, json={"success": False, "error": str(e), "chat_id": chat_id})
+
+@app.get("/")
+def home():
+    return {"status": "HF Engine is Active", "user": "Laki"}
+
+@app.post("/download")
+async def download_video(data: dict, background_tasks: BackgroundTasks):
+    video_url = data.get("url")
+    chat_id = data.get("chat_id")
+    webhook = data.get("webhook")
+    
+    if not video_url or not chat_id:
+        raise HTTPException(status_code=400, detail="URL and chat_id are required")
+    
+    background_tasks.add_task(process_video_task, video_url, chat_id, webhook)
+    
+    return {
+        "success": True, 
+        "message": "Processing started"
+    }
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=7860)
