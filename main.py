@@ -32,7 +32,7 @@ def webhook():
             bot.send_file(
                 chat_id, 
                 video_url, 
-                caption=f"✅ **{title}**\n\nHalkan ka daawo muuqaalkaaga!",
+                caption=f"**{title}**\n\nHalkan ka daawo muuqaalkaaga!",
                 supports_streaming=True
             ), main_loop
         )
@@ -45,7 +45,7 @@ def run_web():
 
 @bot.on(events.NewMessage(pattern='/start'))
 async def start(event):
-    await event.reply("**Haye Laki!** Iisoo dir linkiga TikTok, Instagram ama Pinterest si aan HF Engine ugu diro.")
+    await event.reply("**Haye !** Iisoo dir linkiga TikTok, Instagram ama Pinterest si aan HF Engine ugu diro.")
 
 @bot.on(events.NewMessage)
 async def handler(event):
@@ -53,7 +53,7 @@ async def handler(event):
         return
         
     url = event.text
-    msg = await event.reply("⏳ **Codsigaaga waxaa loo diray HF Engine (16GB RAM)...**")
+    msg = await event.reply("👀 ** Checking **")
 
     payload = {
         "url": url,
@@ -64,11 +64,11 @@ async def handler(event):
     try:
         response = requests.post(HF_SERVER_URL, json=payload, timeout=10)
         if response.status_code == 200:
-            await msg.edit("📥 **HF waa uu bilaabay soo dejinta. Markuu dhameeyo Telegram ayaa si toos ah kuugu soo diri doona.**")
+            await msg.edit("😜 **Downloading**")
         else:
-            await msg.edit("❌ Cilad Engine-ka ah.")
+            await msg.edit("❌ Cilad Server-ka ah.")
     except Exception:
-        await msg.edit("❌ Khalad: Server-ka Engine-ka lama heli karo.")
+        await msg.edit("❌ Khalad: Server-ka lama heli karo.")
 
 async def main():
     global main_loop
