@@ -2,56 +2,10 @@ import os
 import asyncio
 import threading
 import socks
-from flask import Flask
+import gradio as gr
 from telethon import TelegramClient, events
 from telethon.tl.types import DocumentAttributeVideo
 from yt_dlp import YoutubeDL
-
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Bot Status</title>
-        <style>
-            body { 
-                background: #0f0f0f; 
-                display: flex; 
-                justify-content: center; 
-                align-items: center; 
-                height: 100vh; 
-                margin: 0; 
-                font-family: sans-serif;
-            }
-            .container { text-align: center; }
-            h1 {
-                color: #00ff88;
-                font-size: 3rem;
-                text-transform: uppercase;
-                letter-spacing: 5px;
-                animation: pulse 1.5s infinite alternate;
-            }
-            @keyframes pulse {
-                from { opacity: 0.4; transform: scale(0.95); }
-                to { opacity: 1; transform: scale(1.05); }
-            }
-            p { color: white; font-size: 1.2rem; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <h1>I'M RUNNING</h1>
-            <p>TikTok, Instagram & Pinterest Downloader is Active! 🚀</p>
-        </div>
-    </body>
-    </html>
-    """
-
-def run_web():
-    app.run(host='0.0.0.0', port=7860)
 
 API_ID = 29169428
 API_HASH = '55742b16a85aac494c7944568b5507e5'
@@ -160,12 +114,24 @@ async def handler(event):
     except Exception as e:
         await msg.edit(f"❌ Khalad ayaa dhacay: Linkigaas lama soo dejin karo xilligan.")
 
-async def main():
-    await bot.start(bot_token=BOT_TOKEN)
-    await bot.run_until_disconnected()
-
-if __name__ == '__main__':
-    threading.Thread(target=run_web, daemon=True).start()
+def run_bot():
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
-    loop.run_until_complete(main())
+    bot.start(bot_token=BOT_TOKEN)
+    bot.run_until_disconnected()
+
+def fake_api(input_text):
+    return f"Processing: {input_text} ... Status: Bot is Active 🚀"
+
+if __name__ == '__main__':
+    threading.Thread(target=run_bot, daemon=True).start()
+    
+    interface = gr.Interface(
+        fn=fake_api,
+        inputs=gr.Textbox(label="System Status Check", placeholder="Geli qoraal..."),
+        outputs=gr.Textbox(label="Result"),
+        title="AI Video Processing Engine",
+        description="Kani waa interface-ka maamulka nidaamka. Bot-ka Telegram-ka wuxuu ku dhex ordayaa gadaal."
+    )
+    
+    interface.launch(server_name="0.0.0.0", server_port=7860)
