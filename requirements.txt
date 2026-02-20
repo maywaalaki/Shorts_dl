@@ -3,3 +3,9 @@ yt-dlp
 flask
 requests
 telethon
+
+gradio
+telethon
+yt-dlp
+PySocks
+flask
